@@ -3,8 +3,6 @@ package com.hypers.www.sample;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
 import android.net.TrafficStats;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,9 +22,6 @@ import java.net.URL;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.type;
-import static android.os.Build.VERSION_CODES.N;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,7 +1,5 @@
 package com.hypers.www.sample;
 
-import android.app.usage.NetworkStatsManager;
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.net.TrafficStats;
 import android.os.Bundle;
@@ -34,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_get)
     Button mBtnGet;
 
-    String[] arry = new String[]{};
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainActivity", "TrafficStats.getUidTxBytes(uid):" +
                             TrafficStats.getUidTxBytes(uid) / 1024 + "KB");
 
-                    NetworkStatsManager nsm = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
+//                    NetworkStatsManager nsm = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
 //                    nsm.querySummary(ConnectivityManager.TYPE_WIFI,
 //                            uid+"",
 //                            Long.MIN_VALUE,

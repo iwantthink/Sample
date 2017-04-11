@@ -1,7 +1,5 @@
 package com.hypers.www.sample;
 
-import android.content.pm.ApplicationInfo;
-import android.net.TrafficStats;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +12,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,49 +28,31 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_get)
     Button mBtnGet;
 
+    public static final String CONNECTION_URL =
+            "https://m.irs01.com/hmt?_t=i&_z=m";
+    //    public static final String CONNECTION_URL = "https://www.baidu.com";
+    String http_req = "http://office.hypers.com.cn/hmt?_t=i&_z=m";
+    public static String PRE_URL = "https://m.irs01.com/hmt?_t=i&_z=m";
+    public static String PRE_REQ_URL = "https://m.irs01.com/imt?_t=i&_z=m";
+    public static String ONLINE_CONFIG_URL = "https://m.irs01.com/hmt_pro/project/";
+    String date = "{\"client_data_list\":[{\"mac1\":\"27d0c7ba1353c99ce20ef0d19d394620\",\"model\":\"GT-I9300\",\"ts\":\"1491817450270\",\"char\":\"\",\"is_jail_break\":true,\"app_version\":\"1.0.2\",\"mac\":\"4adf9b3762ff4b683f0353018b9b6a94\",\"type\":\"client_data\",\"app_name\":\"Hmtdemo\",\"lang\":\"zh\",\"lac\":\"43042\",\"network\":\"WIFI\",\"_openudid\":\"9cf6f3145ec9fce3\",\"androidid\":\"5a3592ceba4eebcd37b6ad27380d81a5\",\"is_mobile_device\":true,\"device_name\":\"Samsung GT-I9300\",\"have_gps\":true,\"_mac\":\"5c:0a:5b:b1:3e:d5\",\"have_gravity\":true,\"sv\":\"1.0.16\",\"_imei\":\"353818055991309\",\"app_code\":\"3\",\"lat\":\"31.257785\",\"os\":\"0\",\"lon\":\"121.484951\",\"useragent\":\"Hmtdemo_1.0.2\",\"cell_id\":\"11451695\",\"phone_type\":1,\"sr\":\"720x1280\",\"imei\":\"5c7c020549532e2b65eb2c6f3d4e27bc\",\"sd\":\"\",\"package_name\":\"hmtdemo.hmt.com.hmtdemo.wandoujia.debug\",\"_ua\":\"hmt_9KW6JRVT\",\"device_id\":\"b4a8d3943233d9d96a2e1ed25ecaa2a0\",\"muid\":\"\",\"have_wifi\":true,\"channel_id\":\"hmt\",\"os_version\":\"4.4\",\"v\":\"1.7.1\",\"androidid1\":\"9cf6f3145ec9fce3\",\"have_bt\":true,\"manufacturer\":\"samsung\",\"producer\":\"m0zc\",\"aaid\":\"\",\"_androidid\":\"9cf6f3145ec9fce3\",\"mccmnc\":\"\",\"imsi\":\"\"}]}";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        updateNetBytes();
-    }
+//        updateNetBytes();
 
-    private void updateNetBytes() {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ApplicationInfo pif = getPackageManager().getApplicationInfo(
-                            getPackageName(), 0);
-                    int uid = pif.uid;
-                    Log.d("MainActivity", "TrafficStats.getTotalRxBytes():" +
-                            TrafficStats.getTotalRxBytes() / 1024 + "KB");
-                    Log.d("MainActivity", "TrafficStats.getTotalTxBytes():" +
-                            TrafficStats.getTotalTxBytes() / 1024 + "KB");
-                    Log.d("MainActivity", "TrafficStats.getUidRxBytes(uid):" +
-                            TrafficStats.getUidRxBytes(uid) / 1024 + "KB");
-                    Log.d("MainActivity", "TrafficStats.getUidTxBytes(uid):" +
-                            TrafficStats.getUidTxBytes(uid) / 1024 + "KB");
-
-//                    NetworkStatsManager nsm = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
-//                    nsm.querySummary(ConnectivityManager.TYPE_WIFI,
-//                            uid+"",
-//                            Long.MIN_VALUE,
-//                            Long.MAX_VALUE);
-                    //俩者相加就是应用所使用的流量
-                    mTvRx.setText(pif.uid + "rx bytes = " +
-                            TrafficStats.getUidRxBytes(pif.uid));
-                    mTvTx.setText(pif.uid + "tx bytes  = " +
-                            TrafficStats.getUidTxBytes(pif.uid));
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                MyMessage myMessage = NetworkUitlity.get(CONNECTION_URL);
+//                Log.d("MainActivity", "myMessage.getMsg():" + myMessage.getMsg());
+//                Log.d("MainActivity", "myMessage.isFlag():" + myMessage.isFlag());
+//
+//            }
+//        }).start();
     }
 
     @OnClick(R.id.btn_get)
@@ -82,21 +60,12 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    URL url = new URL("https://www.baidu.com/s?wd=what&rsv_spt=1&rsv_iqid=0xe9ba1d4e0002930e&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=3&rsv_sug1=1&rsv_sug7=001&rsv_sug2=0&inputT=960&rsv_sug4=1661&rsv_sug=9");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-//                    InputStream is = connection.getInputStream();
-                    String respStr = connection.getResponseMessage();
-                    Log.d("MainActivity", "connection.getResponseCode():" + connection.getResponseCode());
-                    Log.d("MainActivity", "respStr = " + respStr);
+//                MyMessage myMessage = NetworkUitlity.get(ONLINE_CONFIG_URL + "xx.config");
+                boolean resullt = NetworkUitlity.post(PRE_URL, date, "all_data");
+                Log.d("MainActivity", "resullt:" + resullt);
+//                Log.d("MainActivity", "myMessage.getMsg():" + myMessage.getMsg());
+//                Log.d("MainActivity", "myMessage.isFlag():" + myMessage.isFlag());
 
-
-                    updateNetBytes();
-                } catch (Exception e) {
-                    Log.e("MainActivity", "e:" + e);
-                }
             }
         }).start();
     }

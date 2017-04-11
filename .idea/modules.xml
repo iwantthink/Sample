@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sample.iml" filepath="$PROJECT_DIR$/Sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcenter_upload/jcenter_upload.iml" filepath="$PROJECT_DIR$/jcenter_upload/jcenter_upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcenter_upload_old/jcenter_upload_old.iml" filepath="$PROJECT_DIR$/jcenter_upload_old/jcenter_upload_old.iml" />
     </modules>
   </component>
 </project>

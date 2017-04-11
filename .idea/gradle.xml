@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/jcenter_upload" />
+            <option value="$PROJECT_DIR$/jcenter_upload_old" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

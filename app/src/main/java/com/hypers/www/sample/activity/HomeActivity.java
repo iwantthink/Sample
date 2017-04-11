@@ -19,13 +19,17 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hypers.www.sample.R;
+import com.hypers.www.sample.fragment.ItemFragment;
 import com.hypers.www.sample.fragment.WebviewFragment;
+import com.hypers.www.sample.fragment.dummy.DummyContent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, WebviewFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        WebviewFragment.OnFragmentInteractionListener,
+        ItemFragment.OnListFragmentInteractionListener {
 
     @BindView(R.id.content_home)
     FrameLayout mContentHome;
@@ -64,7 +68,8 @@ public class HomeActivity extends AppCompatActivity
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         mFragments[0] = WebviewFragment.newInstance();
-        transaction.add(R.id.content_home, mFragments[0], "webview").commit();
+        mFragments[1] = ItemFragment.newInstance(10);
+        transaction.add(R.id.content_home, mFragments[1], "itemFragment").add(R.id.content_home, mFragments[0], "webview").commit();
 
 
     }
@@ -81,30 +86,22 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         FragmentManager manager = getSupportFragmentManager();
@@ -113,7 +110,7 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_webview) {
             transaction.show(mFragments[0]).commit();
         } else if (id == R.id.nav_gallery) {
-
+            transaction.hide(mFragments[0]).show(mFragments[1]).commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -131,6 +128,11 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 }

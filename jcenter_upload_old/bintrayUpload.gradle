@@ -1,22 +1,21 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 // This is the library version used when deploying the artifact
-version = "1.0.1"
+version = "1.0.3"
 
 def siteUrl = 'https://github.com/iwantthink/Sample'      // 项目的主页
 def gitUrl = 'https://github.com/iwantthink/Sample.git'   // Git仓库的url
 group = "com.hmt.analytics"                                        // Maven Group ID for the artifact，一般填你唯一的包名
-
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
         pom {
             project {
-                packaging 'aar'
+                packaging 'jar'
                 // Add your description here
                 name 'description demo '
-                artifactId 'sayhello'
                 url siteUrl
+                artifactId = 'sayhello'//项目名称
                 // Set your license
                 licenses {
                     license {

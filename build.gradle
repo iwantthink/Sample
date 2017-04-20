@@ -37,5 +37,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+task hello doLast {
+    description 'wo le ge qu '
+    println 'hello gradle'
+}
 
 //tasks.getByPath(":jcenter_upload:mavenAndroidJavadocs").enabled = false

@@ -1,6 +1,49 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
+//gradle.beforeProject {
+//    println " ===== ${it} ===== "
+//}
+//
+//gradle.buildStarted {
+//    println '===== build started ====='
+//}
+//
+//gradle.buildFinished {
+//    println '===== build finished ====='
+//}
+//
+//tasks.whenTaskAdded {
+//    println ' ===== task name = ' + it.name
+//}
+
+//gradle.taskGraph.addTaskExecutionListener(new TaskExecutionListener() {
+//    @Override
+//    void beforeExecute(Task task) {
+//        println ' beforeExecute===== take name = ' + task.name
+//    }
+//
+//    @Override
+//    void afterExecute(Task task, TaskState state) {
+//        println ' afterExecute===== task name = ' + task.name
+//    }
+//})
+
+gradle.addListener(new TaskExecutionListener() {
+
+    @Override
+    void beforeExecute(Task task) {
+        println ' beforeExecute===== take name = ' + task.name
+
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState state) {
+        println ' afterExecute===== task name = ' + task.name
+
+    }
+})
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -18,7 +61,7 @@ android {
         release {
             keyAlias 'sample'
             keyPassword '123456'
-            storeFile file('E:/github/Sample/app/sample.jks')
+            storeFile file('sample.jks')
             storePassword '123456'
         }
     }
@@ -55,6 +98,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.hmt.analytics:sayhello:1.0.1'
 
 }

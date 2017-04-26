@@ -3,6 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+
+        maven {
+            url uri('../Sample/repo') //插件所在的目录
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
@@ -10,6 +14,7 @@ buildscript {
 //        classpath 'com.novoda:bintray-release:0.4.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.hypers:helloPlugin:0.1' //添加依赖
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -36,10 +41,6 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-task hello doLast {
-    description 'wo le ge qu '
-    println 'hello gradle'
 }
 
 //tasks.getByPath(":jcenter_upload:mavenAndroidJavadocs").enabled = false

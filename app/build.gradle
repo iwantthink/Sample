@@ -1,5 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.hypers.HelloPlugin' //应用插件
+
+//personExt{
+//
+//    name = 'aaaa'
+//    age = 10
+//    boy = false
+//
+//}
+
+team {
+    John{
+        age = 10
+        boy = false
+    }
+
+    Tom{
+        age = 20
+        boy = false
+    }
+}
 
 //gradle.beforeProject {
 //    println " ===== ${it} ===== "
@@ -16,8 +37,9 @@ apply plugin: 'com.jakewharton.butterknife'
 //tasks.whenTaskAdded {
 //    println ' ===== task name = ' + it.name
 //}
-
+//
 //gradle.taskGraph.addTaskExecutionListener(new TaskExecutionListener() {
+//
 //    @Override
 //    void beforeExecute(Task task) {
 //        println ' beforeExecute===== take name = ' + task.name
@@ -29,20 +51,18 @@ apply plugin: 'com.jakewharton.butterknife'
 //    }
 //})
 
-gradle.addListener(new TaskExecutionListener() {
-
-    @Override
-    void beforeExecute(Task task) {
-        println ' beforeExecute===== take name = ' + task.name
-
-    }
-
-    @Override
-    void afterExecute(Task task, TaskState state) {
-        println ' afterExecute===== task name = ' + task.name
-
-    }
-})
+//gradle.addListener(new TaskExecutionListener() {
+//
+//    @Override
+//    void afterExecute(Task task, TaskState state) {
+//
+//    }
+//
+//    @Override
+//    void beforeExecute(Task task) {
+//
+//    }
+//})
 
 android {
     compileSdkVersion 25

@@ -1,1 +1,1 @@
-include ':app', ':jcenter_upload', ':jcenter_upload_old'
+include ':app', ':jcenter_upload', ':jcenter_upload_old', ':groovylibrary', ':agentlibrary'

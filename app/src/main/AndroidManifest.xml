@@ -26,7 +26,8 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.WebViewActivity">
+        <activity
+            android:name=".activity.WebViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
